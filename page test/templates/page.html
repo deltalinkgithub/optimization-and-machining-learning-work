@@ -1,0 +1,134 @@
+<head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script  src = "https://unpkg.com/element-ui/lib/index.js" > </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> 
+</head>
+<body>
+    <div id="app-11">
+        <a href="main.html">
+            <img src="store.png" width="40" height="40"  style="position:absolute;top:5px;left:70px;">
+        </a>
+        <p1 id='t3' :click="log">序列</p1>
+        <el-menu id="m1" default-active="2" class="el-menu-vertical-demo"  @click='log()' background-color='#99cdd6' :collapse-transition=false>
+            <el-submenu index="1">
+                <template slot="title" @click='log()'>
+                    <span id="s1" @click='log()'>第一項</span>
+                </template>
+                <el-menu-item-group>
+                    <template slot="title">分组一</template>
+                    <el-menu-item index="1-1" @click="log()">第一之一類</el-menu-item>
+                    <el-menu-item index="1-2">第一之二類</el-menu-item>
+                  </el-menu-item-group>
+            </el-submenu>
+            <el-submenu index="2">
+                <template slot="title" @click='log()'>
+                    <span id="s1" @click='log()'>第二項</span>
+                </template>
+                <el-menu-item-group>
+                    <template slot="title">分组二</template>
+                    <el-menu-item index="2-1" @click="log()">第二之一類</el-menu-item>
+                    <el-menu-item index="2-2">第二之二類</el-menu-item>
+                  </el-menu-item-group>
+            </el-submenu>
+        </el-menu>
+        <div id="i1">
+            <el-input  v-model="a" placeholder="请输入内容a"></el-input>
+            <el-input  v-model="p" placeholder="请输入内容p"></el-input>
+            <el-button id="b1" type="primary" @click="login()">主要按钮</el-button>
+        </div>
+    </div>
+</body>
+<script>
+    var app11=new Vue({
+    el:'#app-11',
+    data:{
+        a:'',
+        p:''
+        },
+    methods:{
+        login(){
+            axios
+            .post('http://localhost:8003//login',{
+                first:this.a,
+                second:this.p
+            })
+            .then((response)=>alert(response.data))
+            .catch((error)=>console.log(error))
+        },
+        log(){
+            console.log('test')
+        }
+    }
+})
+</script>
+<style>
+    body{
+        position: absolute;
+        top: 0;
+        left: 0; 
+        right: 0;
+        bottom: 0;
+        margin:auto;
+    }
+    #app-11 {
+        width: 200px;
+        height: 19200px;
+        background: rgb(153, 205, 214);
+        /*position: absolute;
+        top: 0;
+        left: 0; 
+        right: 0;
+        bottom: 0;
+        margin:auto;*/
+        }
+    #b1{
+        position:absolute;
+        top:5px;
+        left:220px;
+    }
+    
+    #t1{
+        position:absolute;
+        top:5px;
+        left:60px;
+    }
+    #t3{
+        position:absolute;
+        top:70px;
+        left:60px;
+        font-size:30px;
+        margin:auto;
+    }
+    #i1{
+        position:absolute;
+        top:10px;
+        left:850px;
+        font-size:20px;
+        margin:auto;
+    }
+    #m1{
+        position:absolute;
+        top:120px;
+        left:0px;
+        font-size:60px;
+        margin:auto;
+    }
+    .el-menu {
+        border-right:rgb(153, 205, 214);
+    }
+    .el-submenu__title{
+        font-size:20px;
+    }
+    .el-menu-item-group__title {
+        font-size:20px;
+    }
+    .el-menu-item{
+        font-size:20px;
+    }
+    .el-input__inner {
+        height:30px;
+        width:50%
+  </style>
